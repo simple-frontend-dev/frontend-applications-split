@@ -7,11 +7,15 @@
 
 body {
   margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+main {
   display: flex;
   place-items: center;
   justify-content: center;
-  min-width: 320px;
-  min-height: 100vh;
+  margin-top: 8rem;
 }
 
 h1 {

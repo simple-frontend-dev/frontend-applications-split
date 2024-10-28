@@ -1,2 +1,4 @@
+# link-workspace-packages: true
 packages:
   - "apps/*"
+  - "packages/*"

@@ -4,7 +4,9 @@
 
 When your applications are live under the same domain but different URLS, for example https://website.com/home and https://website.com/blog, then you will have to use a reverse proxy at some point in your stack to be able to serve the different frontend applications mapped to different repositories.
 
-The simplest setup you can use for that is a dedicated reverse proxy such as [nginx](https://nginx.org/) for incoming requests to https://website.com
+The simplest setup you can use for that is a dedicated reverse proxy such as [nginx](https://nginx.org/) for incoming requests to https://website.com.
+
+To share packages accross apps, you can publish your private npm packages you install in your frontend applications.
 
 ## When to use
 

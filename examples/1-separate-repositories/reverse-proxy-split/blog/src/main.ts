@@ -1,7 +1,13 @@
 import "./style.css";
 
-document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
-  <div>
+const html = String.raw;
+
+document.querySelector<HTMLDivElement>("#app")!.innerHTML = html`
+  <nav>
+    <a href="/home">Home</a>
+    <a href="/blog">Blog</a>
+  </nav>
+  <main>
     <h1>Blog</h1>
-  </div>
+  </main>
 `;

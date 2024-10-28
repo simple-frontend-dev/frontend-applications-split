@@ -21,7 +21,7 @@ There are multiple disavantages which can build up over time:
 
 - Teams will each have to dedicate time to develop and maintain duplicated infrastructure in terms of dependency management, security maitenance, local developer experience, CI/CD, devops, etc.
 - Cross team contributions will be more difficult if the tech stacks and code architecture starts to diverge
-- While possible, sharing dependencies between those teams (design system, common librairies) will not scale well with the number of dependencies
+- While possible, sharing dependencies between those teams (design system, common librairies) will not scale well with the number of dependencies and frontend applications
 
 ## Setup
 

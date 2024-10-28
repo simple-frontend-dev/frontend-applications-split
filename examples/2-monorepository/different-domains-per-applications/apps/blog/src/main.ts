@@ -1,7 +1,11 @@
 import "./style.css";
+import "header";
 
-document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
-  <div>
+const html = String.raw;
+
+document.querySelector<HTMLDivElement>("#app")!.innerHTML = html`
+  <website-header></website-header>
+  <main>
     <h1>Blog</h1>
-  </div>
+  </main>
 `;

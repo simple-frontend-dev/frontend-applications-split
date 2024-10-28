@@ -1,0 +1,17 @@
+{
+  "name": "header",
+  "version": "0.0.1",
+  "private": "true",
+  "sideEffects": false,
+  "type": "module",
+  "exports": {
+    ".": "./src/header.ts"
+  },
+  "typesVersions": {
+    "*": {
+      "header": [
+        "./src/header.ts"
+      ]
+    }
+  }
+}
