@@ -14,7 +14,7 @@ Here we will enhance the reverse proxy setup with shared runtime dependencies th
 
 The second version of Module Federation is supported by all major bundlers and allows you to share code and resources among multiple JavaScript application at runtime!
 
-## When to use
+## When to use?
 
 When you have very distinct apps in terms of business logic and you want every team to align their development practices to encourage reusability, sharing dependencies and reduce the overall efforts on developer experience and dependencies management. You also want to have shared runtime dependencies for reusability and centralization of common concerns.
 

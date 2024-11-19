@@ -6,7 +6,7 @@ When your applications are live under distinct domains, for example https://webs
 
 Here we have 2 folders `homepage` and `blog` which you can see as 2 different repositories you can host and deploy completely independently.
 
-## When to use
+## When to use?
 
 When you have very distinct apps in terms of business logic which are managed by a very small number of teams (2 to 3 maximum) and each team has good frontend expertise, this setup makes sense.
 

@@ -1,20 +1,20 @@
 # One Monorepository
 
-## Reverse proxy split
+## Distinct domains per applications
 
-When your applications are live under the same domain but different URLs, for example https://website.com/home and https://website.com/blog, then you will have to use a reverse proxy at some point in your stack to be able to serve the different frontend applications which can be apps in a monorepository.
+When your applications are live under distinct domains, for example https://website-home.com and https://website-blog.com, you can use a monorepository to serve your different frontend applications.
 
-A monorepository presents many [advantages](https://www.simplefrontend.dev/blog/why-a-frontend-monorepo/)!
+In fact it presents many [advantages](https://www.simplefrontend.dev/blog/why-a-frontend-monorepo/)!
 
 Here we have 2 folders `homepage` and `blog` which you can see as 2 different applications you can host and deploy completely independently.
 
-## When to use
+## When to use?
 
-When you have very distinct apps in terms of business logic and you want every team to align their development practices to encourage reusability, sharing dependencies and reduce the overall efforts on developer experience and dependencies management.
+When you have very distinct apps in terms of business logic and you want every team to align their development practicse to encourage reusability, sharing dependencies and reduce the overall efforts on developer experience and dependencies management.
 
 ## Consequences:
 
-There are many advantages to this setup:
+There are 4 main advantages to this setup:
 
 1. Teams will be able to focus on delivering business value by mainly focusing on application code
 2. Streamlined development with shared opininated configurations (Typescript, formatting, linting etc)
@@ -63,73 +63,24 @@ import { Header } from "@common/header";
 
 This is following [Turbo's Just-in-Time Packages](https://turbo.build/repo/docs/core-concepts/internal-packages#just-in-time-packages) approach which works great with modern bundlers like Vite and completely eliminates the need for a specific build steps for those packages (which is good for a demo like this one but not necessarily what you might one in a large monorepo setup).
 
-We also need to extend the default vite configuration to serve our apps at predefined ports, for example for the homepage app:
-
-```javascript
-import { defineConfig } from "vite";
-
-export default defineConfig({
-  server: {
-    port: 3000,
-  },
-  base: "/home",
-});
-```
-
-We extend the default nginx configuration with:
-
-```
-server {
-    listen 8080;
-
-    location /home {
-        proxy_pass http://localhost:3000;
-    }
-
-    location /blog {
-        proxy_pass http://localhost:4000;
-    }
-}
-```
-
 ## Demo
 
-1. [Install nginx](https://nginx.org/en/docs/install.html). On MacOS I would recommend installing it through brew:
-
-```bash
-brew install nginx
-```
-
-2. At the root of the repository, install dependencies:
+1. At the root of the repository, install dependencies:
 
 ```bash
 pnpm install
 ```
 
-3. Open 3 terminal windows to install dependencies and run applications:
+2. Open 2 terminal windows to install dependencies and run applications:
 
-4. Homepage app:
+3. Homepage app:
 
 ```bash
 cd ./homepage && pnpm run dev
 ```
 
-5. Blog app:
+4. Blog app:
 
 ```bash
 cd ./blog && pnpm run dev
 ```
-
-6. nginx:
-
-```bash
-[sudo] nginx -c %ABSOLUTE_PATH_TO_THIS_FOLDER%/reverse-proxy.conf
-```
-
-7. Stop nginx with
-
-```bash
-[sudo] nginx -c %ABSOLUTE_PATH_TO_THIS_FOLDER%/reverse-proxy.conf -s quit
-```
-
-You can now navigate to http://localhost:8080/home and http://localhost:8080/blog to access your frontend applications. (Do not directly access localhost:3000 or localhost:4000 otherwise navigation won't work.)
