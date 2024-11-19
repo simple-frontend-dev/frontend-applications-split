@@ -37,107 +37,117 @@ There are a few disavantages:
 
 I will skip the nginx setup that you can find [here](../reverse-proxy-split/).
 
-`homepage` and `blog` app folders each contain a simple vanilla Typescript app built with default Vite configuration. They are both importing a local package `header` to reuse seamlessly on both apps, even during development. The header app is a web component in this example but it could be anything.
+`homepage` and `blog` folders each contain a simple vanilla Typescript app built with Vite and setup with module federation to host remote applications.
 
 I am using the default workspace setup from pnpm with a `pnpm-workspace.yaml` configuration as follows:
 
 ```yaml
 packages:
   - "apps/*"
-  - "packages/*"
 ```
 
-`header` package is configured to export all its main module this in package.json
-
-```json
-"exports": {
-  ".": "./src/main.ts"
-}
-```
-
-`homepage` and `blog` can then refer to the local package within their package.json file:
-
-```json
-"dependencies": {
-    "header": "workspace:*"
-}
-```
-
-and then just use a normal import:
+`homepage` app is setup as module federation host with the following vite config (similar for blog):
 
 ```typescript
-import { Header } from "@common/header";
-```
-
-This is following [Turbo's Just-in-Time Packages](https://turbo.build/repo/docs/core-concepts/internal-packages#just-in-time-packages) approach which works great with modern bundlers like Vite and completely eliminates the need for a specific build steps for those packages (which is good for a demo like this one but not necessarily what you might one in a large monorepo setup).
-
-We also need to extend the default vite configuration to serve our apps at predefined ports, for example for the homepage app:
-
-```javascript
 import { defineConfig } from "vite";
+import { federation } from "@module-federation/vite";
 
 export default defineConfig({
-  server: {
-    port: 3000,
-  },
-  base: "/home",
+  plugins: [
+    federation({
+      name: "homepage",
+      remotes: {
+        banner: {
+          type: "module",
+          name: "banner",
+          entry: "http://localhost:2000/banner.js",
+          entryGlobalName: "remote-banner",
+        },
+        "web-vitals-reporter": {
+          type: "module",
+          name: "web-vitals-reporter",
+          entry: "http://localhost:2001/web-vitals-reporter.js",
+          entryGlobalName: "remote-web-vitals-reporter",
+        },
+      },
+    }),
+  ],
 });
 ```
 
-We extend the default nginx configuration with:
+`remote-banner` and `remote-web-vitals-reporter` simulate how shared runtime dependencies app would run and by injected at runtime thanks to module federation.
 
-```
-server {
-    listen 8080;
+They are also in `apps` folder as they are also independant running applications
 
-    location /home {
-        proxy_pass http://localhost:3000;
-    }
+They do not have to know anything about their host applications and a sample vite config looks like this:
 
-    location /blog {
-        proxy_pass http://localhost:4000;
-    }
-}
+```typescript
+import { defineConfig } from "vite";
+import { federation } from "@module-federation/vite";
+
+export default defineConfig({
+  server: {
+    origin: "http://localhost:2000",
+    port: 2000,
+  },
+  base: "http://localhost:2000",
+  plugins: [
+    federation({
+      name: "banner",
+      filename: "banner.js",
+      exposes: {
+        ".": "./src/main.ts",
+      },
+    }),
+  ],
+});
 ```
 
 ## Demo
 
-1. [Install nginx](https://nginx.org/en/docs/install.html). On MacOS I would recommend installing it through brew:
-
-```bash
-brew install nginx
-```
-
-2. At the root of the repository, install dependencies:
+1. At the root of the repository, install dependencies:
 
 ```bash
 pnpm install
 ```
 
-3. Open 3 terminal windows to install dependencies and run applications:
+2. Open 4 terminal windows to install dependencies and run applications:
 
-4. Homepage app:
+3. Homepage app:
 
 ```bash
-cd ./homepage && pnpm run dev
+cd ./apps/homepage && pnpm run dev
 ```
 
-5. Blog app:
+4. Blog app:
 
 ```bash
-cd ./blog && pnpm run dev
+cd ./apps/blog && pnpm run dev
 ```
 
-6. nginx:
+5. Banner remote app:
 
 ```bash
-[sudo] nginx -c %ABSOLUTE_PATH_TO_THIS_FOLDER%/reverse-proxy.conf
+cd ./apps/remote-banner && pnpm run dev
 ```
 
-7. Stop nginx with
+6. Web vitals reporter remote app:
 
 ```bash
-[sudo] nginx -c %ABSOLUTE_PATH_TO_THIS_FOLDER%/reverse-proxy.conf -s quit
+cd ./apps/remote-web-vitals-reporter && pnpm run dev
 ```
 
 You can now navigate to http://localhost:8080/home and http://localhost:8080/blog to access your frontend applications. (Do not directly access localhost:3000 or localhost:4000 otherwise navigation won't work.)
+
+## Why runtime dependencies?
+
+Runtime dependencies are much easier to synchronize accross apps as you can simply redeploy them for every apps to have their latest version, eliminating lots of tedious work. Of course that puts increase risks on those app deliveries so a good quality assurance process will be necessary.
+
+The biggest advantage is that you can release hotfixes and new features without having to syncrhonize and redeploy all your applications.
+
+## What's the difference with a script tag loading a remote script that can be updated?
+
+There are 2 main advantages of using module federation:
+
+1. You can declare **shared** packages dependencies between your host and remotes such as framework dependencies (React, Vue etc) to reduce the overall bundle size while allowing the flexibility of framework development.
+2. Great developer experience and debuggigng tools. This is where v2 of module federation really shines in my opinion with debugging tools integration such as [Chrome DevTools](https://module-federation.io/guide/basic/chrome-devtool.html)

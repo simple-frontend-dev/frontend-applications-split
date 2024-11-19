@@ -1,10 +1,8 @@
 import "./style.css";
 
-try {
-  import("web-vitals-reporter");
-} catch (error) {
+import("web-vitals-reporter").catch((error) => {
   console.error("Unable to load web-vitals-reporter module: ", error);
-}
+});
 
 const html = String.raw;
 

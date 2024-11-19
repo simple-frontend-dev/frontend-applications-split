@@ -92,19 +92,19 @@ export default defineConfig({
 cd ./homepage && pnpm install && pnpm run dev
 ```
 
-2. Blog host app:
+3. Blog host app:
 
 ```bash
 cd ./blog && pnpm install && pnpm run dev
 ```
 
-2. Banner remote app:
+4. Banner remote app:
 
 ```bash
 cd ./remote-banner && pnpm install && pnpm run dev
 ```
 
-2. Web vitals reporter remote app:
+5. Web vitals reporter remote app:
 
 ```bash
 cd ./remote-web-vitals-reporter && pnpm install && pnpm run dev
