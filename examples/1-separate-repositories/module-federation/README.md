@@ -2,7 +2,7 @@
 
 ## Module Federation
 
-When your applications are live under the same domain but different URLs, for example https://website.com/home and https://website.com/blog
+When your applications are live under the same domain but different URLs, for example https://website.com/home and https://website.com/blog, then you will have to use a reverse proxy at some point in your stack to be able to serve the different frontend applications mapped to different repositories.
 
 For the basic setup you can check [the reverse proxy split setup](../reverse-proxy-split/).
 
