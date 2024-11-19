@@ -6,17 +6,17 @@ export default defineConfig({
     federation({
       name: "homepage",
       remotes: {
-        "web-vitals-reporter": {
-          type: "module",
-          name: "web-vitals-reporter",
-          entry: "http://localhost:2000/web-vitals-reporter.js",
-          entryGlobalName: "remote-web-vitals-reporter",
-        },
         banner: {
           type: "module",
           name: "banner",
-          entry: "http://localhost:2001/banner.js",
+          entry: "http://localhost:2000/banner.js",
           entryGlobalName: "remote-banner",
+        },
+        "web-vitals-reporter": {
+          type: "module",
+          name: "web-vitals-reporter",
+          entry: "http://localhost:2001/web-vitals-reporter.js",
+          entryGlobalName: "remote-web-vitals-reporter",
         },
       },
     }),

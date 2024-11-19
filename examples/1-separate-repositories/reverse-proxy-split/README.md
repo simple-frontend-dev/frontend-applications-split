@@ -8,7 +8,9 @@ The simplest setup you can use for that is a dedicated reverse proxy such as [ng
 
 To share packages accross apps, you can publish your private npm packages you install in your frontend applications.
 
-## When to use
+Here we have 2 folders `homepage` and `blog` which you can see as 2 different repositories you can host and deploy completely independently and connect their exposed endpoint to your favorite reverse proxy.
+
+## When to use ?
 
 When you have very distinct apps in terms of business logic which are managed by a very small number of teams (2 to 3 maximum) and each team has good frontend expertise, this setup makes sense.
 
@@ -16,7 +18,7 @@ When you have very distinct apps in terms of business logic which are managed by
 
 There are 2 main advantages to this setup:
 
-1. Teams will be able to operate in competely autonomy to one another so they are able to choose different tech stacks and release at different paces
+1. Teams will be able to operate in competely autonomy to one another so they are able to choose different tech stacks and release at different paces.
 2. Hosting and deployment of those different applications is simple as one repository maps to one domain
 
 There are multiple disavantages which can build up over time:
@@ -81,7 +83,7 @@ cd ./blog && pnpm install && pnpm run dev
 5. on third window, run:
 
 ```bash
-[sudo] -c %ABSOLUTE_PATH_TO_THIS_FOLDER%/reverse-proxy.conf
+[sudo]nginx -c %ABSOLUTE_PATH_TO_THIS_FOLDER%/reverse-proxy.conf
 ```
 
-You can now navigate to http://localhost:8080/home and http://localhost:8080/blog to access your frontend applications
+You can now navigate to http://localhost:8080/home and http://localhost:8080/blog to access your frontend applications. (Do not directly access localhost:3000 or localhost:4000 otherwise navigation won't work.)

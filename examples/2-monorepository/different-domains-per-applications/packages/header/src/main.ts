@@ -13,14 +13,10 @@ export class Header extends HTMLElement {
           text-align: center;
           padding: 2rem;
           font-size: 2rem;
-        }
-        a {
-          color: white;
+          background-color: darkorange;
         }
       </style>
-      <div>Welcome to website</div>
+      <div>Shared local package banner</div>
     `;
   }
 }
-
-customElements.define("website-header", Header);

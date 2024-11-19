@@ -13,5 +13,6 @@ export const Banner = ({
   banner.style.justifyContent = "center";
   banner.style.alignItems = "center";
   banner.style.fontSize = "2rem";
+  banner.style.height = "100px";
   return banner;
 };

@@ -1,5 +1,7 @@
 import "./style.css";
-import "header";
+import { Header } from "@common/header";
+
+customElements.define("website-header", Header);
 
 const html = String.raw;
 

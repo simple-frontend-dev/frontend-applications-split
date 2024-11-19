@@ -2,9 +2,9 @@
 
 ## Distinct domains per applications
 
-When your applications are live under distinct domains, for example https://website-home.com and https://website-blog.com, then it is straightforward to use different repositories to serve your different frontend applications
+When your applications are live under distinct domains, for example https://website-home.com and https://website-blog.com, then it is straightforward to use different repositories to serve your different frontend applications.
 
-Here we have 2 folders `homepage` and `blog` which you can see as 2 different repositories you can host and deploy completely independently
+Here we have 2 folders `homepage` and `blog` which you can see as 2 different repositories you can host and deploy completely independently.
 
 ## When to use
 
@@ -29,7 +29,7 @@ There are multiple disavantages which can build up over time:
 
 ## Demo
 
-1. Open 2 terminal windows
+1. Open 2 terminal windows to install dependencies and run applications:
 
 2. On first window, run:
 
@@ -43,4 +43,4 @@ cd ./homepage && pnpm install && pnpm run dev
 cd ./blog && pnpm install && pnpm run dev
 ```
 
-You can access both applications under different domains
+You can access both applications under different domains (represented by different ports in this example)

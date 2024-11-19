@@ -5,9 +5,18 @@
   background-color: #242424;
 }
 
+* {
+  box-sizing: border-box;
+}
 body {
   margin: 0;
   min-width: 320px;
+}
+
+#app {
+  top: 100px;
+  position: absolute;
+  width: 100%;
 }
 
 main {

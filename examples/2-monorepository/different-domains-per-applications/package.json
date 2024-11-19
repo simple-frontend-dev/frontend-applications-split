@@ -1,5 +1,5 @@
 {
-  "name": "2-monorepository-different-domains-per-applications",
+  "name": "monorepository-different-domains-per-applications",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "devDependencies": {
+    "@types/node": "^22.9.0",
     "typescript": "~5.6.2",
     "vite": "^5.4.9"
   },
