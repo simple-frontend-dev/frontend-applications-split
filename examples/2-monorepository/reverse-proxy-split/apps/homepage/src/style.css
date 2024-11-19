@@ -1,0 +1,35 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+}
+
+main {
+  display: flex;
+  place-items: center;
+  justify-content: center;
+  margin-top: 8rem;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+nav {
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+  gap: 2rem;
+  font-size: 1.5rem;
+}
+
+a {
+  color: rgba(255, 255, 255, 0.87);
+}

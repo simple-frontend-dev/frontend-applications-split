@@ -31,10 +31,12 @@ There are multiple disavantages which can build up over time:
 
 `homepage` and `blog` folders each contain a simple vanilla Typescript app built with Vite.
 
-Each application is served under a different distinct port and declares a base path, example for blog:
+Each application is served under a different distinct port and declares a base path, example vite config for blog:
 
 ```javascript
-defineConfig({
+import { defineConfig } from "vite";
+
+export default defineConfig({
   server: {
     port: 4000,
   },
@@ -83,7 +85,13 @@ cd ./blog && pnpm install && pnpm run dev
 5. on third window, run:
 
 ```bash
-[sudo]nginx -c %ABSOLUTE_PATH_TO_THIS_FOLDER%/reverse-proxy.conf
+[sudo] nginx -c %ABSOLUTE_PATH_TO_THIS_FOLDER%/reverse-proxy.conf
+```
+
+7. Stop nginx with
+
+```bash
+[sudo] nginx -c %ABSOLUTE_PATH_TO_THIS_FOLDER%/reverse-proxy.conf -s quit
 ```
 
 You can now navigate to http://localhost:8080/home and http://localhost:8080/blog to access your frontend applications. (Do not directly access localhost:3000 or localhost:4000 otherwise navigation won't work.)

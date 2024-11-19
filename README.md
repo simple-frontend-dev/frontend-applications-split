@@ -23,14 +23,14 @@ When you have very distinct apps in terms of business logic which are managed by
 
 There are 2 main advantages to this setup:
 
-- Teams will be able to operate in competely autonomy to one another so they are able to choose different tech stacks and release at different paces
-- Hosting and deployment of those different applications is simple as one repository maps to one domain
+1. Teams will be able to operate in competely autonomy to one another so they are able to choose different tech stacks and release at different paces
+2. Hosting and deployment of those different applications is simple as one repository maps to one domain
 
 There are multiple disavantages which can build up over time:
 
-- Teams will each have to dedicate time to develop and maintain duplicated infrastructure in terms of dependency management, security maitenance, local developer experience, CI/CD, devops, etc.
-- Cross team contributions will be more difficult if the tech stacks and code architecture starts to diverge
-- While possible, sharing dependencies between those teams (design system, common librairies) will not scale well with the number of dependencies and frontend applications
+1. Teams will each have to dedicate time to develop and maintain duplicated infrastructure in terms of dependency management, security maitenance, local developer experience, CI/CD, devops, etc.
+2. Cross team contributions will be more difficult if the tech stacks and code architecture starts to diverge
+3. While possible, sharing dependencies between those teams (design system, common librairies) will not scale well with the number of dependencies and frontend applications
 
 ##### [Example setup](./examples/1-separate-repositories/different-domains-per-applications/)
 
