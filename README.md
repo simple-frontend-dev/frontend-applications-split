@@ -1,4 +1,4 @@
-# Frontend applications split - showcase of different setups with code examples
+# How to split your frontend application - showcase of 6 different setups with code examples
 
 ## Seperate repositories
 
