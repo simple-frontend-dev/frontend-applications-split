@@ -64,6 +64,16 @@ Cons:
 
 #### [Example setup](./examples/monorepository/reverse-proxy-split/)
 
+#### Sharing package dependencies
+
+With this setup, it is simple and easy to share local package dependencies between apps, these can be for examples UI modules or a horizontal enablement integration such as analytics.
+
+#### Sharing runtime dependencies - See [Why runtime dependencies?](#Why-runtime-dependencies)
+
+This is where [Module Federation](https://module-federation.io/guide/start/index.html) come in handy. The second version of Module Federation is supported by all major bundlers and allows you to share code and resources among multiple JavaScript application at runtime.
+
+#### [Example setup](./examples/monorepository/different-url-per-application-module-federation/)
+
 ## Seperate repositories
 
 ### Why?

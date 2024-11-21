@@ -1,5 +1,5 @@
 {
-  "name": "monorepository-different-domain-per-application-module-federation",
+  "name": "monorepository-different-url-per-application-module-federation",
   "private": true,
   "version": "0.0.0",
   "type": "module",

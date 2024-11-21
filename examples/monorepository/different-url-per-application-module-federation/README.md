@@ -1,14 +1,14 @@
 # Monorepository
 
-### Different domain per application with module federation
+## Different url per application
 
-When your applications are live under distinct domains, for example https://website-home.com and https://website-blog.com, you can still use a monorepository to serve your different frontend applications.
+When your applications are live under the same domain but at different URLs, for example https://website.com/home and https://website.com/blog, then you will have to use a reverse proxy at some point in your stack to be able to route the traffic to your different frontend applications. You can still use a monorepository to serve your different frontend applications.
 
 In fact it presents many [advantages](https://www.simplefrontend.dev/blog/why-a-frontend-monorepo/).
 
 In this example, we have 2 folders `homepage` and `blog` which you can see as 2 different applications you can host and deploy completely independently.
 
-## When to use?
+## When to use ?
 
 You have distinct apps serving different purposes and you you want different applications and/or teams to align and share their development setup and practices to encourage reusability and reduce overall efforts on developer experience and dependencies management.
 
