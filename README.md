@@ -32,7 +32,7 @@ Cons:
 
 #### Sharing package dependencies
 
-This setup makes it super simple to share local package dependencies between apps, these can be for examples UI modules but not only.
+With this setup, it is simple and easy to share local package dependencies between apps, these can be for examples UI modules or a horizontal enablement integration such as analytics.
 
 #### Sharing runtime dependencies - See [Why runtime dependencies?](#Why-runtime-dependencies)
 
@@ -64,23 +64,6 @@ There are a few disavantages:
 2. You will have to invest into a collaboration model and a proper code architecture for the monorepository (which is a benefit in disguise)
 
 #### [Example setup](./examples/monorepository/reverse-proxy-split/)
-
-## Why runtime dependencies?
-
-Runtime dependencies are much easier to synchronize accross apps as you can simply redeploy them for every apps to have their latest version, eliminating lots of tedious work. Of course that puts increase risks on those app deliveries so a good quality assurance process will be necessary.
-
-The biggest advantage is that you can release hotfixes and new features without having to syncrhonize and redeploy all your applications.
-
-### What's the difference with a script tag loading a remote script that can be updated?
-
-There are 2 main advantages of using module federation:
-
-1. You can declare **shared** packages dependencies between your host and remotes such as framework dependencies (React, Vue etc) to reduce the overall bundle size while allowing the flexibility of framework development.
-2. Great developer experience and debuggigng tools. This is where v2 of module federation really shines in my opinion with debugging tools integration such as [Chrome DevTools](https://module-federation.io/guide/basic/chrome-devtool.html)
-
-### Advantages
-
-You will be able to centralize some of your cross cutting concerns such as observability and A/B testing.
 
 ## Seperate repositories
 
@@ -144,3 +127,18 @@ There are multiple disavantages which can build up over time:
 3. While possible, sharing dependencies between those teams (design system, common librairies) will not scale well with the number of dependencies
 
 #### [Example setup](./examples/separate-repositories/reverse-proxy-split/)
+
+## Why runtime dependencies?
+
+Runtime dependencies are much easier to synchronize accross apps as you can simply redeploy them for every apps to have their latest version, eliminating lots of tedious work. Of course that puts increase risks on those app deliveries so a good quality assurance process is necessary.
+
+The biggest advantage is that you can release hotfixes and new features for these dependencies without having to syncrhonize and redeploy all your applications.
+
+Common use case include sharing global UI componments like a header or footer as well as horizontal enablement such as analytics, A/B testing or observability.
+
+### What's the difference with a script tag loading a remote script that can be updated?
+
+There are 2 main advantages of using module federation:
+
+1. You can declare **shared** packages dependencies between your host and remotes such as framework dependencies (React, Vue etc) to reduce the overall bundle size while allowing the flexibility of framework development.
+2. Great developer experience and debuggigng tools. This is where v2 of module federation really shines in my opinion with debugging tools integration such as [Chrome DevTools](https://module-federation.io/guide/basic/chrome-devtool.html)
