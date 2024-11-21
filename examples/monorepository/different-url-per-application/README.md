@@ -10,7 +10,7 @@ In this example, we have 2 folders `homepage` and `blog` which you can see as 2 
 
 ## When to use ?
 
-You have distinct apps serving different purposes and you you want different applications and/or teams to align and share their development setup and practices to encourage reusability and reduce overall efforts on developer experience and dependencies management.
+You have distinct apps serving different purposes and you want different applications and/or teams to align and share their development setup and practices to encourage reusability and reduce overall efforts on developer experience and dependencies management.
 
 ## Consequences of this setup:
 
