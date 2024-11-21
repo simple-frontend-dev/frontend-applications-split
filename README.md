@@ -8,7 +8,7 @@ This is the default setup I would recommend for most frontend teams. I have cove
 
 ### Different domain per application
 
-When your applications are live under distinct domains, for example https://website-home.com and https://website-blog.com, you can still use a monorepository to serve your different frontend applications.
+When your applications are live under different domains, for example https://website-home.com and https://website-blog.com, you can still use a monorepository to serve your different frontend applications.
 
 #### When to use?
 
@@ -85,13 +85,13 @@ There are use cases where seperate repositories per applications make sense. The
 
 ### different domain per application
 
-When your applications are live under distinct domains, for example https://website-home.com and https://website-blog.com, then it is straightforward to use different repositories to serve your different frontend applications.
+When your applications are live under different domains, for example https://website-home.com and https://website-blog.com, then it is straightforward to use different repositories to serve your different frontend applications.
 
 #### When to use?
 
 You have distinct apps serving different purposes which are managed by different large teams with good frontend expertise in each and you do not want them to share the same infrastructure.
 
-#### Consequences
+#### Consequences of this setup:
 
 Pros:
 
@@ -108,13 +108,13 @@ Cons:
 
 #### Sharing package dependencies
 
-With this setup, it is time consuming to share package dependencies between apps. These can be for examples UI modules or a horizontal enablement integration such as analytics.
+With this setup, it is time consuming to share package dependencies between apps as you need to publish and update them in each repository. These can be for examples UI modules or a horizontal enablement integration such as analytics.
 
 #### Sharing runtime dependencies - See [Why runtime dependencies?](#Why-runtime-dependencies)
 
 This is where [Module Federation](https://module-federation.io/guide/start/index.html) come in handy. The second version of Module Federation is supported by all major bundlers and allows you to share code and resources among multiple JavaScript application at runtime without the need to package and update them in all your repositories.
 
-#### [Example setup](./examples/seperate-repositories/different-domain-per-application-module-federation/)
+#### [Example setup](./examples/separate-repositories/different-domain-per-application-module-federation/)
 
 ### One domain for applications which are live at different URLs
 
@@ -124,7 +124,7 @@ When your applications are live under the same domain but different URLs, for ex
 
 When you have very distinct apps in terms of business logic which are managed by a very small number of teams (2 to 3 maximum) and each team has good frontend expertise, this setup makes sense.
 
-#### Consequences
+#### Consequences of this setup:
 
 There are 2 main advantages to this setup:
 

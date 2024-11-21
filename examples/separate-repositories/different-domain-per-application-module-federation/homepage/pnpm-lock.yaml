@@ -7,11 +7,10 @@ settings:
 importers:
 
   .:
-    dependencies:
-      '@module-federation/vite':
-        specifier: ^1.1.3
-        version: 1.1.3(rollup@4.24.2)
     devDependencies:
+      '@module-federation/vite':
+        specifier: ^1.1.6
+        version: 1.1.6(rollup@4.24.2)
       typescript:
         specifier: ~5.6.2
         version: 5.6.3
@@ -162,14 +161,17 @@ packages:
   '@jridgewell/sourcemap-codec@1.5.0':
     resolution: {integrity: sha512-gv3ZRaISU3fjPAgNsriBRqGWQL6quFx04YMPW/zD8XMLsU32mhCCbfbO6KZFLjvYpCZ8zyDEgqsgf+PwPaM7GQ==}
 
-  '@module-federation/runtime@0.6.13':
-    resolution: {integrity: sha512-xcyOtt9k5u/G201DsMP9bGj0WSeGgCKGKxxmgMC7h5qFFuH/4x5p7TDTBNoBqrgN15ERMxdukTEJEg1GFXymZA==}
+  '@module-federation/error-codes@0.7.6':
+    resolution: {integrity: sha512-XVzX/sRFj1h5JvOOVMoFppxq0t1t3o/AlEICHgWX+dybIwJgz9g4gihZOWVZfz5/xsKGcUwdH5X7Z2nkuYhJEw==}
 
-  '@module-federation/sdk@0.6.13':
-    resolution: {integrity: sha512-eZvTH8hBZepPkOGeTQfCm57EO/R/F2Tf+OjPOIMDPNDeS6tfvNUA+CLl9ir2UzwGfjgIwCBhBbtxj47t3CH3EA==}
+  '@module-federation/runtime@0.7.6':
+    resolution: {integrity: sha512-TEEDbGwaohZ2dMa+Sk/Igq8XpcyfjqJfbL20mdAZeifSFVZYRSCaTd/xIXP7pEw8+5BaCMc4YfCf/XcjFAUrVA==}
 
-  '@module-federation/vite@1.1.3':
-    resolution: {integrity: sha512-ZY1iRcFosJfI5XRPaKoLk/rdg0HC3wVNXq1QHpT2eSiccn+GIYp43bCRZhRJ4sE/FCdGfh+ARxSAok/bEuwMZA==}
+  '@module-federation/sdk@0.7.6':
+    resolution: {integrity: sha512-MFE+RtsHnutZOCp2eKpa3A/yzZ8tOPmjX7QRdVnB2qqR9JA2SH3ZP5+cYq76tzFQZvU1BCWAQVNMvqGOW2yVZQ==}
+
+  '@module-federation/vite@1.1.6':
+    resolution: {integrity: sha512-jMLpwzBnodzo4rne3dkmZAZThrpz5hJsirGXjV3SJbe+7adNxVuxGoXtn7/g90zJf3/BDreMDyZX21FufE2RpA==}
 
   '@rollup/pluginutils@5.1.3':
     resolution: {integrity: sha512-Pnsb6f32CD2W3uCaLZIzDmeFyQ2b8UWMFI7xtwUezpcGBDVDW6y9XgAWIlARiGAo6eNF5FK5aQTr0LFyNyqq5A==}
@@ -353,6 +355,10 @@ packages:
     resolution: {integrity: sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw==}
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
     os: [darwin]
+
+  isomorphic-rslog@0.0.6:
+    resolution: {integrity: sha512-HM0q6XqQ93psDlqvuViNs/Ea3hAyGDkIdVAHlrEocjjAwGrs1fZ+EdQjS9eUPacnYB7Y8SoDdSY3H8p3ce205A==}
+    engines: {node: '>=14.17.6'}
 
   loupe@3.1.2:
     resolution: {integrity: sha512-23I4pFZHmAemUnz8WZXbYRSKYj801VDaNv9ETuMh7IrMc7VuVVSo+Z9iLE3ni30+U48iDWfi30d3twAXBYmnCg==}
@@ -566,15 +572,20 @@ snapshots:
 
   '@jridgewell/sourcemap-codec@1.5.0': {}
 
-  '@module-federation/runtime@0.6.13':
-    dependencies:
-      '@module-federation/sdk': 0.6.13
+  '@module-federation/error-codes@0.7.6': {}
 
-  '@module-federation/sdk@0.6.13': {}
-
-  '@module-federation/vite@1.1.3(rollup@4.24.2)':
+  '@module-federation/runtime@0.7.6':
     dependencies:
-      '@module-federation/runtime': 0.6.13
+      '@module-federation/error-codes': 0.7.6
+      '@module-federation/sdk': 0.7.6
+
+  '@module-federation/sdk@0.7.6':
+    dependencies:
+      isomorphic-rslog: 0.0.6
+
+  '@module-federation/vite@1.1.6(rollup@4.24.2)':
+    dependencies:
+      '@module-federation/runtime': 0.7.6
       '@rollup/pluginutils': 5.1.3(rollup@4.24.2)
       defu: 6.1.4
       estree-walker: 2.0.2
@@ -761,6 +772,8 @@ snapshots:
 
   fsevents@2.3.3:
     optional: true
+
+  isomorphic-rslog@0.0.6: {}
 
   loupe@3.1.2: {}
 

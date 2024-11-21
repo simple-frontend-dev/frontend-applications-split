@@ -1,16 +1,14 @@
-# Monorepository
+# Separate Repositories
 
 ### Different domain per application with module federation
 
-When your applications are live under different domains, for example https://website-home.com and https://website-blog.com, you can still use a monorepository to serve your different frontend applications.
+When your applications are live under different domains, for example https://website-home.com and https://website-blog.com, then it is straightforward to use different repositories to serve your different frontend applications.
 
-In fact it presents many [advantages](https://www.simplefrontend.dev/blog/why-a-frontend-monorepo/).
-
-In this example, we have 2 folders `homepage` and `blog` which you can see as 2 different applications you can host and deploy completely independently.
+In this example, 2 folders `homepage` and `blog` which you can see as 2 different repositories you can host and deploy completely independently.
 
 ## When to use?
 
-You have distinct apps serving different purposes and you want different applications and/or teams to align and share their development setup and practices to encourage reusability and reduce overall efforts on developer experience and dependencies management.
+You have distinct apps serving different purposes which are managed by different large teams with good frontend expertise in each and you do not want them to share the same infrastructure.
 
 You also want to share runtime dependencies between your apps that you can update without redeploying your apps.
 
@@ -18,26 +16,18 @@ You also want to share runtime dependencies between your apps that you can updat
 
 Pros:
 
-1. Streamlined development with shared opininated configurations (Typescript, formatting, linting etc.) that allow developers to focus on delivering business value.
-1. You no longer have to synchronize shared dependencies releases and updates accross many scattered repositories.
-1. Cross team contributions are much easier.
-1. One (possibly virtual) team can focus on operational work (dependency management, security maitenance, local developer experience, CI/CD, devops, etc.), and all teams will benefit from it.
+1. Teams will be able to operate in competely autonomy so they are able to choose different tech stacks and release at different paces.
+1. Hosting and deployment of those different applications is simple as one repository maps to one domain.
 1. You can release hotfixes and new features for your runtime dependencies without having to syncrhonize and redeploy all your applications.
 
 Cons:
 
-1. You have to invest a bit more in the initial setup for example to setup monorepository tooling.
-1. You have to invest into a collaboration model and a proper code architecture for the monorepository (which is a benefit in disguise).
+1. Teams will each have to dedicate time to develop and maintain duplicated infrastructure in terms of dependency management, security maitenance, local developer experience, CI/CD, devops, etc.
+1. Cross team contributions will be more difficult if the tech stacks and code architecture start to diverge.
+1. While possible, sharing static dependencies between those teams (design system, common librairies) will not scale well with the number of dependencies and frontend applications.
 1. You have to monitor your runtime dependencies as regular applications.
 
 ## Setup
-
-I am using the default workspace setup from pnpm with a `pnpm-workspace.yaml` configuration as follows:
-
-```yaml
-packages:
-  - "apps/*"
-```
 
 `homepage` and `blog` folders under apps each contain a simple Typescript app built with Vite.
 
@@ -98,43 +88,37 @@ Finally, update your `tsconfig.json` configuration with the paths of the remote 
 
 ```json
 "paths": {
-  "web-vitals-reporter": ["./apps/remote-web-vitals-reporter/src/main.ts"],
-  "banner": ["./apps/remote-banner/src/main.ts"]
+  "web-vitals-reporter": ["../remote-web-vitals-reporter/src/main.ts"],
+  "banner": ["../remote-banner/src/main.ts"]
 }
 ```
 
 ## Demo
 
-1. At the root of the repository, install dependencies:
+1. Open 4 terminal windows to install dependencies and run applications:
+
+2. Homepage host app:
 
 ```bash
-pnpm install
+cd ./homepage && pnpm install && pnpm run dev
 ```
 
-2. Open 4 terminal windows to run applications:
-
-3. Homepage host app:
+3. Blog host app:
 
 ```bash
-cd ./apps/homepage && pnpm run dev
+cd ./blog && pnpm install && pnpm run dev
 ```
 
-4. Blog host app:
+4. Banner remote app:
 
 ```bash
-cd ./apps/blog && pnpm run dev
+cd ./remote-banner && pnpm install && pnpm run dev
 ```
 
-4. Shared remote banner app:
+5. Web vitals reporter remote app:
 
 ```bash
-cd ./apps/remote-banner && pnpm run dev
-```
-
-4. Shared remote web-vitals-reporter app:
-
-```bash
-cd ./apps/remote-web-vitals-reporter && pnpm run dev
+cd ./remote-web-vitals-reporter && pnpm install && pnpm run dev
 ```
 
 You can access both honmepage and blog applications under different domains (represented by different ports in this example). If you open the console and reload the page, you will see the web vitals reporting coming from the remote web-vitals-reporter module.

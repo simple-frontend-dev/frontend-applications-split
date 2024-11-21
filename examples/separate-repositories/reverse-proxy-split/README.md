@@ -14,7 +14,7 @@ Here we have 2 folders `homepage` and `blog` which you can see as 2 different re
 
 When you have very distinct apps in terms of business logic which are managed by a very small number of teams (2 to 3 maximum) and each team has good frontend expertise, this setup makes sense.
 
-## Consequences
+## Consequences of this setup:
 
 There are 2 main advantages to this setup:
 

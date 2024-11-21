@@ -1,16 +1,16 @@
 # Separate Repositories
 
-## Distinct domains per applications
+### Different domain per application
 
-When your applications are live under distinct domains, for example https://website-home.com and https://website-blog.com, then it is straightforward to use different repositories to serve your different frontend applications.
+When your applications are live under different domains, for example https://website-home.com and https://website-blog.com, then it is straightforward to use different repositories to serve your different frontend applications.
 
-Here we have 2 folders `homepage` and `blog` which you can see as 2 different repositories you can host and deploy completely independently.
+In this example, 2 folders `homepage` and `blog` which you can see as 2 different repositories you can host and deploy completely independently.
 
 ## When to use?
 
 You have distinct apps serving different purposes which are managed by different large teams with good frontend expertise in each and you do not want them to share the same infrastructure.
 
-## Consequences
+## Consequences of this setup:
 
 Pros:
 

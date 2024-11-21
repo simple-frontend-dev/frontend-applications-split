@@ -2,7 +2,7 @@
 
 ### Different domain per application
 
-When your applications are live under distinct domains, for example https://website-home.com and https://website-blog.com, you can still use a monorepository to serve your different frontend applications.
+When your applications are live under different domains, for example https://website-home.com and https://website-blog.com, you can still use a monorepository to serve your different frontend applications.
 
 In fact it presents many [advantages](https://www.simplefrontend.dev/blog/why-a-frontend-monorepo/).
 
