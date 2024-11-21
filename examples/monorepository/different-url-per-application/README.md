@@ -1,14 +1,14 @@
 # Monorepository
 
-### Different domain per application
+## Different url per application
 
-When your applications are live under distinct domains, for example https://website-home.com and https://website-blog.com, you can still use a monorepository to serve your different frontend applications.
+When your applications are live under the same domain but at different URLs, for example https://website.com/home and https://website.com/blog, then you will have to use a reverse proxy at some point in your stack to be able to route the traffic to your different frontend applications. You can still use a monorepository to serve your different frontend applications.
 
 In fact it presents many [advantages](https://www.simplefrontend.dev/blog/why-a-frontend-monorepo/).
 
 In this example, we have 2 folders `homepage` and `blog` which you can see as 2 different applications you can host and deploy completely independently.
 
-## When to use?
+## When to use ?
 
 You have distinct apps serving different purposes and you you want different applications and/or teams to align and share their development setup and practices to encourage reusability and reduce overall efforts on developer experience and dependencies management.
 
@@ -62,26 +62,75 @@ import { Header } from "@common/header";
 
 This is following [Turbo's Just-in-Time Packages](https://turbo.build/repo/docs/core-concepts/internal-packages#just-in-time-packages) approach which works great with modern bundlers like Vite and completely eliminates the need for a specific build step for those packages (which is good for a demo like this one but not necessarily what you might want in a large monorepo setup if you want to cache build artefacts).
 
+We also need to extend the default vite configuration to serve our apps at predefined ports for our reverse proxy, for example for the homepage app:
+
+```javascript
+import { defineConfig } from "vite";
+
+export default defineConfig({
+  server: {
+    port: 3000,
+  },
+  base: "/home",
+});
+```
+
+For the reverse proxy, as a demo, I am using nginx. We extend the default nginx configuration with a local `reverse-proxy.conf` file:
+
+```
+server {
+    listen 8080;
+
+    location /home {
+        proxy_pass http://localhost:3000;
+    }
+
+    location /blog {
+        proxy_pass http://localhost:4000;
+    }
+}
+```
+
+Note: you can use the reverse proxy of choice and it can be deployed where you want in your stack.
+
 ## Demo
 
-1. At the root of the repository, install dependencies:
+1. [Install nginx](https://nginx.org/en/docs/install.html). On MacOS I would recommend installing it through brew:
+
+```bash
+brew install nginx
+```
+
+2. At the root of the repository, install dependencies:
 
 ```bash
 pnpm install
 ```
 
-2. Open 2 terminal windows to install dependencies and run applications:
+3. Open 3 terminal windows to install dependencies and run applications:
 
-3. Homepage app:
-
-```bash
-cd ./apps/homepage && pnpm run dev
-```
-
-4. Blog app:
+4. Homepage app:
 
 ```bash
-cd ./apps/blog && pnpm run dev
+cd ./homepage && pnpm run dev
 ```
 
-You can access both applications under different domains (represented by different ports in this example)
+5. Blog app:
+
+```bash
+cd ./blog && pnpm run dev
+```
+
+6. nginx:
+
+```bash
+[sudo] nginx -c %ABSOLUTE_PATH_TO_THIS_FOLDER%/reverse-proxy.conf
+```
+
+7. Stop nginx with
+
+```bash
+[sudo] nginx -c %ABSOLUTE_PATH_TO_THIS_FOLDER%/reverse-proxy.conf -s quit
+```
+
+You can now navigate to http://localhost:8080/home and http://localhost:8080/blog to access your frontend applications. (Do not directly access localhost:3000 or localhost:4000 otherwise navigation won't work.)

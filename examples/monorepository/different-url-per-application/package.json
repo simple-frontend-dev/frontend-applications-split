@@ -1,5 +1,5 @@
 {
-  "name": "monorepository-different-domain-per-application-module-federation",
+  "name": "monorepository-different-url-per-application",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -9,7 +9,6 @@
     "preview": "vite preview"
   },
   "devDependencies": {
-    "@module-federation/vite": "^1.1.6",
     "@types/node": "^22.9.0",
     "typescript": "~5.6.2",
     "vite": "^5.4.9"
