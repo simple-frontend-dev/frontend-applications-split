@@ -1,6 +1,6 @@
 # Monorepository
 
-### Different domain per application with module federation
+### Different domain per application
 
 When your applications are live under distinct domains, for example https://website-home.com and https://website-blog.com, you can still use a monorepository to serve your different frontend applications.
 
