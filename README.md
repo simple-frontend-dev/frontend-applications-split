@@ -28,7 +28,7 @@ Cons:
 1. You will have to invest a bit more in the initial setup for example to setup monorepository tooling
 1. You will have to invest into a collaboration model and a proper code architecture for the monorepository (which is a benefit in disguise)
 
-#### [Example setup](./examples/monorepository/different-domains-per-applications/)
+#### [Example setup](./examples/monorepository/different-domain-per-application/)
 
 #### Sharing package dependencies
 
@@ -74,7 +74,7 @@ There are use cases where seperate repositories per applications make sense. The
 - Compliance reasons: payment applications to adhere to Payment Card Industry Data Security Standard ([PCI DSS](https://en.wikipedia.org/wiki/Payment_Card_Industry_Data_Security_Standard)) where you need stronger governance and audit trails
 - High independance between teams: though there are negative consequences to this, you might want to prefer the trade off of highly siloed independant teams
 
-### Different domains per applications
+### different domain per application
 
 When your applications are live under distinct domains, for example https://website-home.com and https://website-blog.com, then it is straightforward to use different repositories to serve your different frontend applications.
 
@@ -95,7 +95,7 @@ There are multiple disavantages which can build up over time:
 2. Cross team contributions will be more difficult if the tech stacks and code architecture starts to diverge
 3. While possible, sharing dependencies between those teams (design system, common librairies) will not scale well with the number of dependencies and frontend applications
 
-#### [Example setup](./examples/separate-repositories/different-domains-per-applications/)
+#### [Example setup](./examples/separate-repositories/different-domain-per-application/)
 
 #### Sharing runtime dependencies - See [Why runtime dependencies?](#Why-runtime-dependencies)
 

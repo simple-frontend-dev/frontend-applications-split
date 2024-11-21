@@ -1,5 +1,5 @@
 {
-  "name": "monorepository-different-domains-per-applications",
+  "name": "monorepository-different-domain-per-application",
   "private": true,
   "version": "0.0.0",
   "type": "module",
