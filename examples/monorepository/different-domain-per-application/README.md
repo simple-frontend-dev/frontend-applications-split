@@ -1,16 +1,12 @@
 # Monorepository
 
-### Different domain per application
+### Different domain per application with module federation
 
 When your applications are live under distinct domains, for example https://website-home.com and https://website-blog.com, you can still use a monorepository to serve your different frontend applications.
 
 In fact it presents many [advantages](https://www.simplefrontend.dev/blog/why-a-frontend-monorepo/).
 
 In this example, we have 2 folders `homepage` and `blog` which you can see as 2 different applications you can host and deploy completely independently.
-
-## When to use?
-
-You have distinct apps serving different purposes and you you want different applications and/or teams to align and share their development setup and practices to encourage reusability and reduce overall efforts on developer experience and dependencies management.
 
 ## When to use?
 
@@ -27,8 +23,8 @@ Pros:
 
 Cons:
 
-1. You will have to invest a bit more in the initial setup for example to setup monorepository tooling
-1. You will have to invest into a collaboration model and a proper code architecture for the monorepository (which is a benefit in disguise)
+1. You have to invest a bit more in the initial setup for example to setup monorepository tooling.
+1. You have to invest into a collaboration model and a proper code architecture for the monorepository (which is a benefit in disguise).
 
 ## Setup
 

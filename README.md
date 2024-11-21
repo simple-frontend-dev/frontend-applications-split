@@ -25,10 +25,10 @@ Pros:
 
 Cons:
 
-1. You will have to invest a bit more in the initial setup for example to setup monorepository tooling
-1. You will have to invest into a collaboration model and a proper code architecture for the monorepository (which is a benefit in disguise)
+1. You have to invest a bit more in the initial setup for example to setup monorepository tooling.
+1. You have to invest into a collaboration model and a proper code architecture for the monorepository (which is a benefit in disguise).
 
-#### [Example setup](./examples/monorepository/different-domain-per-application/)
+#### [Example setup](./examples/monorepository/different-domain-per-application)
 
 #### Sharing package dependencies
 
@@ -36,9 +36,9 @@ With this setup, it is simple and easy to share local package dependencies betwe
 
 #### Sharing runtime dependencies - See [Why runtime dependencies?](#Why-runtime-dependencies)
 
-This is where [Module Federation](https://module-federation.io/guide/start/index.html) come in handy. The second version of Module Federation is supported by all major bundlers and allows you to share code and resources among multiple JavaScript application at runtime!
+This is where [Module Federation](https://module-federation.io/guide/start/index.html) come in handy. The second version of Module Federation is supported by all major bundlers and allows you to share code and resources among multiple JavaScript application at runtime.
 
-#### [Example setup](./examples/monorepository/module-federation/)
+#### [Example setup](./examples/monorepository/different-domain-per-application-module-federation/)
 
 ### One domain for all applications which are split by URLs
 

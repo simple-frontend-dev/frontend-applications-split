@@ -17,7 +17,11 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "paths": {
+      "web-vitals-reporter": ["./apps/remote-web-vitals-reporter/src/main.ts"],
+      "banner": ["./apps/remote-banner/src/main.ts"]
+    }
   },
-  "include": ["packages", "apps"]
+  "include": ["apps"]
 }

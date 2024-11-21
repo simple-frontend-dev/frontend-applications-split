@@ -12,9 +12,7 @@ In this example, we have 2 folders `homepage` and `blog` which you can see as 2 
 
 You have distinct apps serving different purposes and you you want different applications and/or teams to align and share their development setup and practices to encourage reusability and reduce overall efforts on developer experience and dependencies management.
 
-## When to use?
-
-You have distinct apps serving different purposes and you you want different applications and/or teams to align and share their development setup and practices to encourage reusability and reduce overall efforts on developer experience and dependencies management.
+You also want to share runtime dependencies between your apps that you can update without redeploying your apps.
 
 ## Consequences of this setup:
 
@@ -24,47 +22,86 @@ Pros:
 1. You no longer have to synchronize shared dependencies releases and updates accross many scattered repositories.
 1. Cross team contributions are much easier.
 1. One (possibly virtual) team can focus on operational work (dependency management, security maitenance, local developer experience, CI/CD, devops, etc.), and all teams will benefit from it.
+1. You can release hotfixes and new features for your runtime dependencies without having to syncrhonize and redeploy all your applications.
 
 Cons:
 
-1. You will have to invest a bit more in the initial setup for example to setup monorepository tooling
-1. You will have to invest into a collaboration model and a proper code architecture for the monorepository (which is a benefit in disguise)
+1. You have to invest a bit more in the initial setup for example to setup monorepository tooling.
+1. You have to invest into a collaboration model and a proper code architecture for the monorepository (which is a benefit in disguise).
+1. You have to monitor your runtime dependencies as regular applications.
 
 ## Setup
-
-`homepage` and `blog` folders under apps each contain a simple Typescript app built with the default Vite configuration. They are both importing a local package `header` shared by both apps, even during local development. The header app is a web component in this example but it could be anything.
 
 I am using the default workspace setup from pnpm with a `pnpm-workspace.yaml` configuration as follows:
 
 ```yaml
 packages:
   - "apps/*"
-  - "packages/*"
 ```
 
-`header` package is configured to export all its main module this in package.json
+`homepage` and `blog` folders under apps each contain a simple Typescript app built with Vite.
 
-```json
-"exports": {
-  ".": "./src/main.ts"
-}
-```
-
-`homepage` and `blog` can then refer to the local package within their package.json file:
-
-```json
-"dependencies": {
-    "header": "workspace:*"
-}
-```
-
-and then just use a normal import:
+`homepage` and `blog` apps are setup as module federation hosts. Example Vite configuration for homepage:
 
 ```typescript
-import { Header } from "@common/header";
+import { defineConfig } from "vite";
+import { federation } from "@module-federation/vite";
+
+export default defineConfig({
+  plugins: [
+    federation({
+      name: "homepage",
+      remotes: {
+        banner: {
+          type: "module",
+          name: "banner",
+          entry: "http://localhost:2000/banner.js",
+          entryGlobalName: "remote-banner",
+        },
+        "web-vitals-reporter": {
+          type: "module",
+          name: "web-vitals-reporter",
+          entry: "http://localhost:2001/web-vitals-reporter.js",
+          entryGlobalName: "remote-web-vitals-reporter",
+        },
+      },
+    }),
+  ],
+});
 ```
 
-This is following [Turbo's Just-in-Time Packages](https://turbo.build/repo/docs/core-concepts/internal-packages#just-in-time-packages) approach which works great with modern bundlers like Vite and completely eliminates the need for a specific build step for those packages (which is good for a demo like this one but not necessarily what you might want in a large monorepo setup if you want to cache build artefacts).
+`remote-banner` and `remote-web-vitals-reporter` simulate how shared runtime dependencies apps would run and be injected at runtime through module federation. They do not have to know anything about their host applications. Example Vite configuration for the banner:
+
+```typescript
+import { defineConfig } from "vite";
+import { federation } from "@module-federation/vite";
+
+export default defineConfig({
+  server: {
+    origin: "http://localhost:2000",
+    port: 2000,
+  },
+  base: "http://localhost:2000",
+  plugins: [
+    federation({
+      name: "banner",
+      filename: "banner.js",
+      exposes: {
+        ".": "./src/main.ts",
+      },
+    }),
+  ],
+});
+```
+
+Finally, update your `tsconfig.json` configuration with the paths of the remote runtime dependencies:
+
+```json
+"paths": {
+  "web-vitals-reporter": ["./apps/remote-web-vitals-reporter/src/main.ts"],
+  "banner": ["./apps/remote-banner/src/main.ts"]
+}
+```
 
 ## Demo
 
@@ -74,7 +111,7 @@ This is following [Turbo's Just-in-Time Packages](https://turbo.build/repo/docs/
 pnpm install
 ```
 
-2. Open 2 terminal windows to install dependencies and run applications:
+2. Open 4 terminal windows to run applications:
 
 3. Homepage app:
 
@@ -88,4 +125,16 @@ cd ./apps/homepage && pnpm run dev
 cd ./apps/blog && pnpm run dev
 ```
 
-You can access both applications under different domains (represented by different ports in this example)
+4. Shared remote banner app:
+
+```bash
+cd ./apps/remote-banner && pnpm run dev
+```
+
+4. Shared remote web-vitals-reporter app:
+
+```bash
+cd ./apps/remote-web-vitals-reporter && pnpm run dev
+```
+
+You can access both honmepage and blog applications under different domains (represented by different ports in this example). If you open the console and reload the page, you will see the web vitals reporting common from the remote module.
