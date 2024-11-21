@@ -137,4 +137,4 @@ cd ./apps/remote-banner && pnpm run dev
 cd ./apps/remote-web-vitals-reporter && pnpm run dev
 ```
 
-You can access both honmepage and blog applications under different domains (represented by different ports in this example). If you open the console and reload the page, you will see the web vitals reporting common from the remote module.
+You can access both honmepage and blog applications under different domains (represented by different ports in this example). If you open the console and reload the page, you will see the web vitals reporting common from the remote web-vitals-reporter module.

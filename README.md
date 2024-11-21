@@ -40,7 +40,7 @@ This is where [Module Federation](https://module-federation.io/guide/start/index
 
 #### [Example setup](./examples/monorepository/different-domain-per-application-module-federation/)
 
-### One domain for applications which are live at different URLs
+### Different url per application under the same domain
 
 When your applications are live under the same domain but at different URLs, for example https://website.com/home and https://website.com/blog, then you will have to use a reverse proxy at some point in your stack to be able to route the traffic to your different frontend applications. You can still use a monorepository to serve your different frontend applications.
 
@@ -48,7 +48,7 @@ When your applications are live under the same domain but at different URLs, for
 
 You have distinct apps serving different purposes and you you want different applications and/or teams to align and share their development setup and practices to encourage reusability and reduce overall efforts on developer experience and dependencies management.
 
-## ##Consequences of this setup:
+#### ##Consequences of this setup:
 
 Pros:
 
@@ -62,7 +62,7 @@ Cons:
 1. You have to invest a bit more in the initial setup for example to setup monorepository tooling.
 1. You have to invest into a collaboration model and a proper code architecture for the monorepository (which is a benefit in disguise).
 
-#### [Example setup](./examples/monorepository/reverse-proxy-split/)
+#### [Example setup](./examples/monorepository/different-url-per-application/)
 
 #### Sharing package dependencies
 

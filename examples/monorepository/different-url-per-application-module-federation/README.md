@@ -1,6 +1,6 @@
 # Monorepository
 
-## Different url per application
+## Different url per application under the same domain
 
 When your applications are live under the same domain but at different URLs, for example https://website.com/home and https://website.com/blog, then you will have to use a reverse proxy at some point in your stack to be able to route the traffic to your different frontend applications. You can still use a monorepository to serve your different frontend applications.
 
@@ -41,13 +41,17 @@ packages:
 
 `homepage` and `blog` folders under apps each contain a simple Typescript app built with Vite.
 
-`homepage` and `blog` apps are setup as module federation hosts. Example Vite configuration for homepage:
+`homepage` and `blog` apps are setup as module federation hosts and served at predefined ports for our reverse proxy. Example Vite configuration for homepage:
 
 ```typescript
 import { defineConfig } from "vite";
 import { federation } from "@module-federation/vite";
 
 export default defineConfig({
+  server: {
+    port: 3000,
+  },
+  base: "/homepage",
   plugins: [
     federation({
       name: "homepage",
@@ -94,7 +98,7 @@ export default defineConfig({
 });
 ```
 
-Finally, update your `tsconfig.json` configuration with the paths of the remote runtime dependencies:
+Update your `tsconfig.json` configuration with the paths of the remote runtime dependencies:
 
 ```json
 "paths": {
@@ -102,6 +106,31 @@ Finally, update your `tsconfig.json` configuration with the paths of the remote 
   "banner": ["./apps/remote-banner/src/main.ts"]
 }
 ```
+
+Finally, for the reverse proxy, as a demo, I am using nginx. We extend the default nginx configuration with a local `reverse-proxy.conf` file:
+
+```
+server {
+    listen 8080;
+
+      location /home {
+        rewrite ^ /homepage break;
+        proxy_pass http://localhost:3000;
+    }
+
+    location /homepage {
+        proxy_pass http://localhost:3000;
+    }
+
+    location /blog {
+        proxy_pass http://localhost:4000;
+    }
+}
+```
+
+I think I've hit a weird bug with Windows Subsystem for Linux and `/home` with Vite module federation so that's why in this example I am redirected /home to /homepage but it should not be necessary native unix systems.
+
+Note: you can use the reverse proxy of choice and it can be deployed where you want in your stack.
 
 ## Demo
 
@@ -111,7 +140,7 @@ Finally, update your `tsconfig.json` configuration with the paths of the remote 
 pnpm install
 ```
 
-2. Open 4 terminal windows to run applications:
+2. Open 5 terminal windows to run the apps as well as nginx:
 
 3. Homepage app:
 
@@ -125,16 +154,30 @@ cd ./apps/homepage && pnpm run dev
 cd ./apps/blog && pnpm run dev
 ```
 
-4. Shared remote banner app:
+5. Shared remote banner app:
 
 ```bash
 cd ./apps/remote-banner && pnpm run dev
 ```
 
-4. Shared remote web-vitals-reporter app:
+6. Shared remote web-vitals-reporter app:
 
 ```bash
 cd ./apps/remote-web-vitals-reporter && pnpm run dev
 ```
 
-You can access both honmepage and blog applications under different domains (represented by different ports in this example). If you open the console and reload the page, you will see the web vitals reporting common from the remote module.
+7. Start nginx:
+
+```bash
+[sudo] nginx -c %ABSOLUTE_PATH_TO_THIS_FOLDER%/reverse-proxy.conf
+```
+
+You can now navigate to http://localhost:8080/home and http://localhost:8080/blog to access your frontend applications. (Do not directly go to localhost:3000 or localhost:4000 otherwise navigation won't work.)
+
+If you open the console and reload the page, you will see the web vitals reporting common from the rremote web-vitals-reporter module.
+
+8. Stop nginx with
+
+```bash
+[sudo] nginx -c %ABSOLUTE_PATH_TO_THIS_FOLDER%/reverse-proxy.conf -s quit
+```

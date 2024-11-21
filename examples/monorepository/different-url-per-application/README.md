@@ -1,6 +1,6 @@
 # Monorepository
 
-## Different url per application
+## Different url per application under the same domain
 
 When your applications are live under the same domain but at different URLs, for example https://website.com/home and https://website.com/blog, then you will have to use a reverse proxy at some point in your stack to be able to route the traffic to your different frontend applications. You can still use a monorepository to serve your different frontend applications.
 
@@ -28,8 +28,6 @@ Cons:
 
 ## Setup
 
-`homepage` and `blog` folders under apps each contain a simple Typescript app built with the default Vite configuration. They are both importing a local package `header` shared by both apps. The header app is a web component in this example but it could be anything.
-
 I am using the default workspace setup from pnpm with a `pnpm-workspace.yaml` configuration as follows:
 
 ```yaml
@@ -37,6 +35,8 @@ packages:
   - "apps/*"
   - "packages/*"
 ```
+
+`homepage` and `blog` folders under apps each contain a simple Typescript app built with Vite. They are both importing a local package `header` shared by both apps. The header app is a web component in this example but it could be anything.
 
 `header` package is configured to export all its main module this in package.json
 
@@ -107,7 +107,7 @@ brew install nginx
 pnpm install
 ```
 
-3. Open 3 terminal windows to install dependencies and run applications:
+3. Open 3 terminal windows to run the apps as well as nginx:
 
 4. Homepage app:
 
@@ -127,10 +127,10 @@ cd ./apps/blog && pnpm run dev
 [sudo] nginx -c %ABSOLUTE_PATH_TO_THIS_FOLDER%/reverse-proxy.conf
 ```
 
+You can now navigate to http://localhost:8080/home and http://localhost:8080/blog to access your frontend applications. (Do not directly go to localhost:3000 or localhost:4000 otherwise navigation won't work.)
+
 7. Stop nginx with
 
 ```bash
 [sudo] nginx -c %ABSOLUTE_PATH_TO_THIS_FOLDER%/reverse-proxy.conf -s quit
 ```
-
-You can now navigate to http://localhost:8080/home and http://localhost:8080/blog to access your frontend applications. (Do not directly go to localhost:3000 or localhost:4000 otherwise navigation won't work.)

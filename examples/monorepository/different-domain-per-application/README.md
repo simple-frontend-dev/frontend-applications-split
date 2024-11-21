@@ -28,8 +28,6 @@ Cons:
 
 ## Setup
 
-`homepage` and `blog` folders under apps each contain a simple Typescript app built with the default Vite configuration. They are both importing a local package `header` shared by both apps. The header app is a web component in this example but it could be anything.
-
 I am using the default workspace setup from pnpm with a `pnpm-workspace.yaml` configuration as follows:
 
 ```yaml
@@ -37,6 +35,8 @@ packages:
   - "apps/*"
   - "packages/*"
 ```
+
+`homepage` and `blog` folders under apps each contain a simple Typescript app built with Vite. They are both importing a local package `header` shared by both apps. The header app is a web component in this example but it could be anything.
 
 `header` package is configured to export all its main module this in package.json
 
