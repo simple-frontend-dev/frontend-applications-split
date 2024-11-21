@@ -20,14 +20,14 @@ Pros:
 
 1. Teams will be able to operate in competely autonomy so they are able to choose different tech stacks and release at different paces.
 1. Hosting and deployment of those different applications is simple as one repository maps to one domain.
-1. You can release hotfixes and new features for your runtime dependencies without having to syncrhonize and redeploy all your applications.
+1. You can release hotfixes and new features for your runtime dependencies without having to synchronize and redeploy all your applications.
 
 Cons:
 
 1. Teams will each have to dedicate time to develop and maintain duplicated infrastructure in terms of dependency management, security maitenance, local developer experience, CI/CD, devops, etc.
 1. Cross team contributions will be more difficult if the tech stacks and code architecture start to diverge.
 1. While possible, sharing static dependencies between those teams (design system, common librairies) will not scale well with the number of dependencies and frontend applications.
-1. You have to monitor your runtime dependencies as regular applications.
+1. You have to monitor your runtime dependencies like you would for regular applications.
 
 ## Setup
 
@@ -120,7 +120,7 @@ server {
 }
 ```
 
-I think I've hit a weird bug with Windows Subsystem for Linux and `/home` with Vite module federation so that's why in this example I am redirected /home to /homepage but it should not be necessary with a native unix systems.
+I think I've hit a weird bug with Windows Subsystem for Linux and `/home` with Vite module federation so that's why in this example I am redirecting /home to /homepage but it should not be necessary with a native unix systems.
 
 Note: you can use the reverse proxy of choice and it can be deployed where you want in your stack.
 

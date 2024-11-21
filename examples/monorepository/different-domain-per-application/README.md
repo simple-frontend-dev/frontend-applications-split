@@ -6,7 +6,7 @@ When your applications are live under different domains, for example https://web
 
 In fact it presents many [advantages](https://www.simplefrontend.dev/blog/why-a-frontend-monorepo/).
 
-In this example, we have 2 folders `homepage` and `blog` which you can see as 2 different applications you can host and deploy completely independently.
+In this example, we have 2 folders `homepage` and `blog` under `apps` which you can see as 2 different applications you can host and deploy completely independently.
 
 ## When to use?
 
@@ -23,7 +23,7 @@ Pros:
 
 Cons:
 
-1. You have to invest a bit more in the initial setup for example to setup monorepository tooling.
+1. You have to invest in the initial setup for example to setup monorepository tooling.
 1. You have to invest into a collaboration model and a proper code architecture for the monorepository (which is a benefit in disguise).
 
 ## Setup

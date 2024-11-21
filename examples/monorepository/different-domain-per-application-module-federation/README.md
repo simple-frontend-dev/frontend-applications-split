@@ -6,7 +6,7 @@ When your applications are live under different domains, for example https://web
 
 In fact it presents many [advantages](https://www.simplefrontend.dev/blog/why-a-frontend-monorepo/).
 
-In this example, we have 2 folders `homepage` and `blog` which you can see as 2 different applications you can host and deploy completely independently.
+In this example, we have 2 folders `homepage` and `blog` under `apps` which you can see as 2 different applications you can host and deploy completely independently.
 
 ## When to use?
 
@@ -22,13 +22,13 @@ Pros:
 1. You no longer have to synchronize shared dependencies releases and updates accross many scattered repositories.
 1. Cross team contributions are much easier.
 1. One (possibly virtual) team can focus on operational work (dependency management, security maitenance, local developer experience, CI/CD, devops, etc.), and all teams will benefit from it.
-1. You can release hotfixes and new features for your runtime dependencies without having to syncrhonize and redeploy all your applications.
+1. You can release hotfixes and new features for your runtime dependencies without having to synchronize and redeploy all your applications.
 
 Cons:
 
-1. You have to invest a bit more in the initial setup for example to setup monorepository tooling.
+1. You have to invest in the initial setup for example to setup monorepository tooling.
 1. You have to invest into a collaboration model and a proper code architecture for the monorepository (which is a benefit in disguise).
-1. You have to monitor your runtime dependencies as regular applications.
+1. You have to monitor your runtime dependencies like you would for regular applications.
 
 ## Setup
 

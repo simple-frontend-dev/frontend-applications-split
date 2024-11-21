@@ -8,7 +8,7 @@ In fact it presents many [advantages](https://www.simplefrontend.dev/blog/why-a-
 
 The simplest setup you can use to map incoming requests is a dedicated reverse proxy such as [nginx](https://nginx.org/) but you can use any reverse proxy at any point in your stack.
 
-In this example, we have 2 folders `homepage` and `blog` which you can see as 2 different repositories you can host and deploy completely independently and connect their exposed endpoint to your reverse proxy.
+In this example, we have 2 folders `homepage` and `blog` under `apps` which you can see as 2 different repositories you can host and deploy completely independently and connect their exposed endpoint to your reverse proxy.
 
 ## When to use ?
 
@@ -24,13 +24,13 @@ Pros:
 1. You no longer have to synchronize shared dependencies releases and updates accross many scattered repositories.
 1. Cross team contributions are much easier.
 1. One (possibly virtual) team can focus on operational work (dependency management, security maitenance, local developer experience, CI/CD, devops, etc.), and all teams will benefit from it.
-1. You can release hotfixes and new features for your runtime dependencies without having to syncrhonize and redeploy all your applications.
+1. You can release hotfixes and new features for your runtime dependencies without having to synchronize and redeploy all your applications.
 
 Cons:
 
-1. You have to invest a bit more in the initial setup for example to setup monorepository tooling.
+1. You have to invest in the initial setup for example to setup monorepository tooling.
 1. You have to invest into a collaboration model and a proper code architecture for the monorepository (which is a benefit in disguise).
-1. You have to monitor your runtime dependencies as regular applications.
+1. You have to monitor your runtime dependencies like you would for regular applications.
 
 ## Setup
 
@@ -130,7 +130,7 @@ server {
 }
 ```
 
-I think I've hit a weird bug with Windows Subsystem for Linux and `/home` with Vite module federation so that's why in this example I am redirected /home to /homepage but it should not be necessary with a native unix systems.
+I think I've hit a weird bug with Windows Subsystem for Linux and `/home` with Vite module federation so that's why in this example I am redirecting /home to /homepage but it should not be necessary with a native unix systems.
 
 Note: you can use the reverse proxy of choice and it can be deployed where you want in your stack.
 
