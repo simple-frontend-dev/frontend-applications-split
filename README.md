@@ -32,7 +32,7 @@ Cons:
 
 #### Sharing package dependencies
 
-With this setup, it is simple and easy to share local package dependencies between apps. These can be for examples UI modules or a horizontal enablement integration such as analytics.
+With this setup, it is simple and easy to share local package dependencies between apps such as UI modules or a horizontal enablement integration like analytics as they are linked locally.
 
 #### Sharing runtime dependencies - See [Why runtime dependencies?](#Why-runtime-dependencies)
 
@@ -66,7 +66,7 @@ Cons:
 
 #### Sharing package dependencies
 
-With this setup, it is simple and easy to share local package dependencies between apps, these can be for examples UI modules or a horizontal enablement integration such as analytics.
+With this setup, it is simple and easy to share local package dependencies between apps such as UI modules or a horizontal enablement integration like analytics as they are linked locally.
 
 #### Sharing runtime dependencies - See [Why runtime dependencies?](#Why-runtime-dependencies)
 
@@ -108,7 +108,7 @@ Cons:
 
 #### Sharing package dependencies
 
-With this setup, it is time consuming to share package dependencies between apps as you need to publish and update them in each repository. These can be for examples UI modules or a horizontal enablement integration such as analytics.
+With this setup, it is time consuming to share package dependencies between apps such as UI modules or a horizontal enablement integration like analytics as you need to publish and update them in each repository.
 
 #### Sharing runtime dependencies - See [Why runtime dependencies?](#Why-runtime-dependencies)
 
@@ -116,28 +116,38 @@ This is where [Module Federation](https://module-federation.io/guide/start/index
 
 #### [Example setup](./examples/separate-repositories/different-domain-per-application-module-federation/)
 
-### One domain for applications which are live at different URLs
+### Different url per application under the same domain
 
 When your applications are live under the same domain but different URLs, for example https://website.com/home and https://website.com/blog, then you will have to use a reverse proxy at some point in your stack to be able to serve the different frontend applications mapped to different repositories.
 
 #### When to use ?
 
-When you have very distinct apps in terms of business logic which are managed by a very small number of teams (2 to 3 maximum) and each team has good frontend expertise, this setup makes sense.
+You have distinct apps serving different purposes which are managed by different large teams with good frontend expertise in each and you do not want them to share the same infrastructure.
 
 #### Consequences of this setup:
 
-There are 2 main advantages to this setup:
+Pros:
 
-1. Teams will be able to operate in competely autonomy to one another so they are able to choose different tech stacks and release at different paces.
-2. Hosting and deployment of those different applications is simple as one repository maps to one domain
+1. Teams will be able to operate in competely autonomy so they are able to choose different tech stacks and release at different paces.
+1. Hosting and deployment of those different applications is simple as one repository maps to an URL subpath mapped to your reverse proxy.
 
-There are multiple disavantages which can build up over time:
+Cons:
 
 1. Teams will each have to dedicate time to develop and maintain duplicated infrastructure in terms of dependency management, security maitenance, local developer experience, CI/CD, devops, etc.
-2. Cross team contributions will be more difficult if the tech stacks and code architecture starts to diverge
-3. While possible, sharing dependencies between those teams (design system, common librairies) will not scale well with the number of dependencies
+1. Cross team contributions will be more difficult if the tech stacks and code architecture start to diverge.
+1. While possible, sharing dependencies between those teams (design system, common librairies) will not scale well with the number of dependencies and frontend applications.
 
-#### [Example setup](./examples/separate-repositories/reverse-proxy-split/)
+#### [Example setup](./examples/separate-repositories/different-url-per-application/)
+
+#### Sharing package dependencies
+
+With this setup, it is time consuming to share package dependencies between apps such as UI modules or a horizontal enablement integration like analytics as you need to publish and update them in each repository.
+
+#### Sharing runtime dependencies - See [Why runtime dependencies?](#Why-runtime-dependencies)
+
+This is where [Module Federation](https://module-federation.io/guide/start/index.html) come in handy. The second version of Module Federation is supported by all major bundlers and allows you to share code and resources among multiple JavaScript application at runtime without the need to package and update them in all your repositories.
+
+#### [Example setup](./examples/separate-repositories/different-url-per-application-module-federation/)
 
 ## Why runtime dependencies?
 

@@ -64,7 +64,7 @@ This is following [Turbo's Just-in-Time Packages](https://turbo.build/repo/docs/
 
 ## Demo
 
-1. At the root of the repository, install dependencies:
+1. At the base folder, install dependencies:
 
 ```bash
 pnpm install

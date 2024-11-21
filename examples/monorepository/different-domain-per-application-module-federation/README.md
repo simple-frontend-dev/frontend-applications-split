@@ -105,7 +105,7 @@ Finally, update your `tsconfig.json` configuration with the paths of the remote 
 
 ## Demo
 
-1. At the root of the repository, install dependencies:
+1. At the base folder, install dependencies:
 
 ```bash
 pnpm install

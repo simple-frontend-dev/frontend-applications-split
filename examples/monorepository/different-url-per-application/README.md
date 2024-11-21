@@ -6,7 +6,9 @@ When your applications are live under the same domain but at different URLs, for
 
 In fact it presents many [advantages](https://www.simplefrontend.dev/blog/why-a-frontend-monorepo/).
 
-In this example, we have 2 folders `homepage` and `blog` which you can see as 2 different applications you can host and deploy completely independently.
+The simplest setup you can use to map incoming requests is a dedicated reverse proxy such as [nginx](https://nginx.org/) but you can use any reverse proxy at any point in your stack.
+
+In this example, we have 2 folders `homepage` and `blog` which you can see as 2 different applications you can host and deploy completely independently and connect their exposed endpoint to your reverse proxy.
 
 ## When to use ?
 
@@ -101,7 +103,7 @@ Note: you can use the reverse proxy of choice and it can be deployed where you w
 brew install nginx
 ```
 
-2. At the root of the repository, install dependencies:
+2. At the base folder, install dependencies:
 
 ```bash
 pnpm install

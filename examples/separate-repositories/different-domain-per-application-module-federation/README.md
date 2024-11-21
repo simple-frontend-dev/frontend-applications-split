@@ -109,13 +109,13 @@ cd ./homepage && pnpm install && pnpm run dev
 cd ./blog && pnpm install && pnpm run dev
 ```
 
-4. Banner remote app:
+4. Shared remote banner app:
 
 ```bash
 cd ./remote-banner && pnpm install && pnpm run dev
 ```
 
-5. Web vitals reporter remote app:
+5. Shared remote web-vitals-reporter app:
 
 ```bash
 cd ./remote-web-vitals-reporter && pnpm install && pnpm run dev
