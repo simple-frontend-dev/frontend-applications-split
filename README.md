@@ -40,7 +40,7 @@ This is where [Module Federation](https://module-federation.io/guide/start/index
 
 #### [Example setup](./examples/monorepository/different-domain-per-application-module-federation/)
 
-### One domain for all applications which are split by URLs
+### One domain for applications which are live at different URLs
 
 When your applications are live under the same domain but at different URLs, for example https://website.com/home and https://website.com/blog, then you will have to use a reverse proxy at some point in your stack to be able to route the traffic to your different frontend applications. You can still use a monorepository to serve your different frontend applications.
 
@@ -104,7 +104,7 @@ This is where [Module Federation](https://module-federation.io/guide/start/index
 
 #### [Example setup](./examples/separate-repositories/module-federation/)
 
-### One domain for all applications which are split by URLs
+### One domain for applications which are live at different URLs
 
 When your applications are live under the same domain but different URLs, for example https://website.com/home and https://website.com/blog, then you will have to use a reverse proxy at some point in your stack to be able to serve the different frontend applications mapped to different repositories.
 
