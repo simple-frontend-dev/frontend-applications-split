@@ -13,7 +13,7 @@ export class Header extends HTMLElement {
           text-align: center;
           padding: 2rem;
           font-size: 2rem;
-          background-color: darkorange;
+          background-color: crimson;
         }
       </style>
       <div>Shared local package banner</div>

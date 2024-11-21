@@ -112,16 +112,16 @@ pnpm install
 4. Homepage app:
 
 ```bash
-cd ./homepage && pnpm run dev
+cd ./apps/homepage && pnpm run dev
 ```
 
 5. Blog app:
 
 ```bash
-cd ./blog && pnpm run dev
+cd ./apps/blog && pnpm run dev
 ```
 
-6. nginx:
+6. Start nginx:
 
 ```bash
 [sudo] nginx -c %ABSOLUTE_PATH_TO_THIS_FOLDER%/reverse-proxy.conf
@@ -133,4 +133,4 @@ cd ./blog && pnpm run dev
 [sudo] nginx -c %ABSOLUTE_PATH_TO_THIS_FOLDER%/reverse-proxy.conf -s quit
 ```
 
-You can now navigate to http://localhost:8080/home and http://localhost:8080/blog to access your frontend applications. (Do not directly access localhost:3000 or localhost:4000 otherwise navigation won't work.)
+You can now navigate to http://localhost:8080/home and http://localhost:8080/blog to access your frontend applications. (Do not directly go to localhost:3000 or localhost:4000 otherwise navigation won't work.)
